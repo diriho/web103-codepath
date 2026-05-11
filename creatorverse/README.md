@@ -66,7 +66,7 @@ In order to connect the user to their database of creators, I am using their **u
 
 ## License
 
-Copyright [👉🏿 2026] [👉🏿 diriho]
+Copyright 👉🏿 2026 by 👉🏿 diriho.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
