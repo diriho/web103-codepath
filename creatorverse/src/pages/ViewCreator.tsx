@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabaseClient';
 import type { Creator } from '../types';
 import { PLATFORM_ASSETS } from '../lib/platformAssets';
 
+
 function getInitials(name: string): string {
   return name
     .split(/\s+/)
