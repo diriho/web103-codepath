@@ -49,4 +49,3 @@ create policy "Users can delete own creators"
   for delete
   using (auth.uid() = user_id);
 
-
