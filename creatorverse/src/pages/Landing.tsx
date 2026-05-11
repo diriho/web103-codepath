@@ -35,7 +35,7 @@ export default function Landing() {
   return (
     <div className="landing">
       <section className="landing-hero container">
-        <span className="eyebrow">A personal creator portfolio</span>
+        <span className="eyebrow">A personal creator catalogue</span>
         <h1>
           Creator<span className="accent">verse</span>
         </h1>
@@ -69,7 +69,7 @@ export default function Landing() {
         </article>
         <article>
           <span className="num">02 ·</span>
-          <h3>Full CRUD control</h3>
+          <h3>Full control</h3>
           <p>
             Add, edit, and delete creators anytime. Tag them by platform, drop
             in a custom thumbnail, write a personal blurb. It's your archive.
@@ -77,10 +77,10 @@ export default function Landing() {
         </article>
         <article>
           <span className="num">03 ·</span>
-          <h3>Secure & private per user</h3>
+          <h3>Secure and private per user</h3>
           <p>
-            Auth-backed accounts with row-level security. Your list stays
-            yours — every other Creatorverse user is invisible to you, and
+            Your list stays yours! <br />
+            Every other Creatorverse user is invisible to you, and
             vice versa.
           </p>
         </article>

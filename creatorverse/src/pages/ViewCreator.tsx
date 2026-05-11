@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import type { Creator } from '../types';
-import { platformBadgeClass } from '../lib/platformBadge';
 import { PLATFORM_ASSETS } from '../lib/platformAssets';
 
 function getInitials(name: string): string {
@@ -127,30 +126,6 @@ export default function ViewCreator() {
         </div>
 
         <div className="creator-detail-meta">
-          {platformLinks.length > 0 ? (
-            <div className="creator-platforms">
-              {platformLinks.map((link) => (
-                <span
-                  key={`${link.platform}-${link.username}`}
-                  className={`${platformBadgeClass(link.platform)} badge-logo`}
-                >
-                  <img
-                    src={PLATFORM_ASSETS[link.platform].src}
-                    alt={PLATFORM_ASSETS[link.platform].label}
-                  />
-                </span>
-              ))}
-            </div>
-          ) : (
-            creator.platform && (
-              <span className={`${platformBadgeClass(creator.platform)} badge-logo`}>
-                <img
-                  src={PLATFORM_ASSETS[creator.platform].src}
-                  alt={PLATFORM_ASSETS[creator.platform].label}
-                />
-              </span>
-            )
-          )}
           <h1>{creator.name}</h1>
           <p className="creator-detail-desc">{creator.description}</p>
 

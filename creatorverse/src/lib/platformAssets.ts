@@ -1,9 +1,9 @@
 import type { Platform } from '../types';
 
 import blueskyLogo from '../assets/bluesky.png';
-import instagramLogo from '../assets/instad.avif';
-import threadsLogo from '../assets/threads.jpg';
-import xLogo from '../assets/twitter.svg';
+import instagramLogo from '../assets/instagram.png';
+import threadsLogo from '../assets/thread.png';
+import xLogo from '../assets/twitter.png';
 import youtubeLogo from '../assets/yt.png';
 
 export const PLATFORM_ASSETS: Record<Platform, { src: string; label: string }> =
