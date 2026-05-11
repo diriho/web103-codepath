@@ -35,12 +35,14 @@ export default function Navbar() {
   };
 
   const isAuthed = !!session;
-  const brandHref = isAuthed ? '/creators' : '/';
+  const brandHref = '/';
 
   return (
     <nav className="navbar" aria-label="Primary">
       <Link to={brandHref} className="navbar-brand">
-        Creatorverse<span className="dot">.</span>
+        <span className="navbar-title">
+          Creatorverse<span className="dot">.</span>
+        </span>
       </Link>
       <div className="navbar-actions">
         {isAuthed ? (

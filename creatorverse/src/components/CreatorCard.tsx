@@ -3,6 +3,7 @@ import type { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Creator } from '../types';
 import { platformBadgeClass } from '../lib/platformBadge';
+import { PLATFORM_ASSETS } from '../lib/platformAssets';
 
 interface CreatorCardProps {
   creator: Creator;
@@ -69,16 +70,22 @@ export default function CreatorCard({ creator, onDelete }: CreatorCardProps) {
             {platformLinks.map((link) => (
               <span
                 key={`${link.platform}-${link.username}`}
-                className={platformBadgeClass(link.platform)}
+                className={`${platformBadgeClass(link.platform)} badge-logo`}
               >
-                {link.platform}
+                <img
+                  src={PLATFORM_ASSETS[link.platform].src}
+                  alt={PLATFORM_ASSETS[link.platform].label}
+                />
               </span>
             ))}
           </div>
         ) : (
           creator.platform && (
-            <span className={platformBadgeClass(creator.platform)}>
-              {creator.platform}
+            <span className={`${platformBadgeClass(creator.platform)} badge-logo`}>
+              <img
+                src={PLATFORM_ASSETS[creator.platform].src}
+                alt={PLATFORM_ASSETS[creator.platform].label}
+              />
             </span>
           )
         )}

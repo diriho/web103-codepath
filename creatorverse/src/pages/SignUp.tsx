@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabaseClient';
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
@@ -17,7 +18,7 @@ export default function SignUp() {
     setError(null);
     setSuccess(null);
 
-    if (!email || !password || !confirm) {
+    if (!name || !email || !password || !confirm) {
       setError('Please fill in every field.');
       return;
     }
@@ -34,6 +35,11 @@ export default function SignUp() {
     const { data, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          full_name: name.trim(),
+        },
+      },
     });
     setSubmitting(false);
 
@@ -68,6 +74,18 @@ export default function SignUp() {
         <form className="form" onSubmit={handleSubmit} noValidate>
           {error && <div className="form-error" role="alert">{error}</div>}
           {success && <div className="form-success" role="status">{success}</div>}
+
+          <div className="form-field">
+            <label htmlFor="name">Name</label>
+            <input
+              id="name"
+              type="text"
+              autoComplete="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
 
           <div className="form-field">
             <label htmlFor="email">Email</label>

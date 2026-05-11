@@ -1,20 +1,54 @@
+import { useEffect, useState } from 'react';
+import type { Session } from '@supabase/supabase-js';
 import { Link } from 'react-router-dom';
+import { supabase } from '../lib/supabaseClient';
 
 export default function Landing() {
+  const [session, setSession] = useState<Session | null | undefined>(undefined);
+
+  useEffect(() => {
+    let mounted = true;
+
+    supabase.auth.getSession().then(({ data }) => {
+      if (mounted) setSession(data.session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      if (mounted) setSession(nextSession);
+    });
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const isAuthed = !!session;
+  const displayName =
+    session?.user.user_metadata?.full_name ||
+    session?.user.user_metadata?.name ||
+    session?.user.email?.split('@')[0] ||
+    'friend';
+
   return (
     <div className="landing">
       <section className="landing-hero container">
-        <span className="eyebrow">A personal creator zine</span>
+        <span className="eyebrow">A personal creator portfolio</span>
         <h1>
           Creator<span className="accent">verse</span>
         </h1>
+        {isAuthed && (
+          <p className="landing-welcome">Welcome, {displayName}</p>
+        )}
         <p className="lede">
           Curate your personal universe of content creators — the streamers,
           YouTubers, podcasters, and makers who shape your world. Build your
           list, share your taste, discover what others are watching.
         </p>
         <div className="landing-cta">
-          <Link to="/signup" className="btn btn-primary">
+          <Link to={isAuthed ? '/creators' : '/signup'} className="btn btn-primary">
             Get started
           </Link>
           <Link to="/login" className="btn btn-ghost">

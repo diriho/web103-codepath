@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import type { Creator } from '../types';
 import { platformBadgeClass } from '../lib/platformBadge';
+import { PLATFORM_ASSETS } from '../lib/platformAssets';
 
 function getInitials(name: string): string {
   return name
@@ -131,45 +132,62 @@ export default function ViewCreator() {
               {platformLinks.map((link) => (
                 <span
                   key={`${link.platform}-${link.username}`}
-                  className={platformBadgeClass(link.platform)}
+                  className={`${platformBadgeClass(link.platform)} badge-logo`}
                 >
-                  {link.platform}
+                  <img
+                    src={PLATFORM_ASSETS[link.platform].src}
+                    alt={PLATFORM_ASSETS[link.platform].label}
+                  />
                 </span>
               ))}
             </div>
           ) : (
             creator.platform && (
-              <span className={platformBadgeClass(creator.platform)}>
-                {creator.platform}
+              <span className={`${platformBadgeClass(creator.platform)} badge-logo`}>
+                <img
+                  src={PLATFORM_ASSETS[creator.platform].src}
+                  alt={PLATFORM_ASSETS[creator.platform].label}
+                />
               </span>
             )
           )}
           <h1>{creator.name}</h1>
           <p className="creator-detail-desc">{creator.description}</p>
 
-          <div className="btn-row">
-            {platformLinks.length > 0
-              ? platformLinks.map((link) => (
+          {platformLinks.length > 0 ? (
+            <ul className="platform-link-list">
+              {platformLinks.map((link) => (
+                <li key={`${link.platform}-${link.username}-link`}>
+                  <span className="platform-link-meta">
+                    <img
+                      src={PLATFORM_ASSETS[link.platform].src}
+                      alt={PLATFORM_ASSETS[link.platform].label}
+                    />
+                  </span>
                   <a
-                    key={`${link.platform}-${link.username}-link`}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-primary"
                   >
-                    {link.platform} ↗
+                    @{link.username}
                   </a>
-                ))
-              : primaryLink && (
-                  <a
-                    href={primaryLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary"
-                  >
-                    Visit channel ↗
-                  </a>
-                )}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            primaryLink && (
+              <a
+                href={primaryLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Visit channel ↗
+              </a>
+            )
+          )}
+
+          <div className="btn-row">
             <Link to={`/creators/${creator.id}/edit`} className="btn">
               Edit
             </Link>
