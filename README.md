@@ -53,7 +53,9 @@ The following **additional** features are implemented:
 - **Styling**: PicoCSS (base) + custom global stylesheet
 
 ## Video Walkthrough
+Google Drive link: https://drive.google.com/drive/folders/1nuym0ihW7StMGk3OhF8ipik56Pi05mJy?usp=drive_link
 
+GitHub link: https://github.com/diriho/web103-codepath.git
 
 
 
